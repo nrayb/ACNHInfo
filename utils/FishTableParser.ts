@@ -1,8 +1,7 @@
 // All the info is extracted from this site:
 // https://animalcrossing.fandom.com/wiki/Fish_(New_Horizons)
 
-
-const northernHemisphereData = `Bitterling	NH-Icon-bitterling	900	River	1	All day	✓	✓	✓	-	-	-	-	-	-	-	✓	✓
+const northernHemisphereFishData = `Bitterling	NH-Icon-bitterling	900	River	1	All day	✓	✓	✓	-	-	-	-	-	-	-	✓	✓
 Pale chub	NH-Icon-palechub	200	River	1	9 AM - 4 PM	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Crucian carp	NH-Icon-cruciancarp	160	River	2	All day	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Dace	NH-Icon-dace	240	River	3	4 PM - 9 AM	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
@@ -83,7 +82,7 @@ Oarfish	NH-Icon-oarfish	9000	Sea	6	All day	✓	✓	✓	✓	✓	-	-	-	-	-	-	✓
 Barreleye	NH-Icon-barreleye	15000	Sea	2	9 PM - 4 AM	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓`;
 
-const southernHemisphereData = `Bitterling	NH-Icon-bitterling	900	River	1	All day	-	-	-	-	✓	✓	✓	✓	✓	-	-	-
+const southernHemisphereFishData = `Bitterling	NH-Icon-bitterling	900	River	1	All day	-	-	-	-	✓	✓	✓	✓	✓	-	-	-
 Pale chub	NH-Icon-palechub	200	River	1	9am - 4pm	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Crucian carp	NH-Icon-cruciancarp	160	River	2	All day	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Dace	NH-Icon-dace	240	River	3	4pm - 9am	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
@@ -164,7 +163,7 @@ Oarfish	NH-Icon-oarfish	9000	Sea	6	All day	-	-	-	-	-	✓	✓	✓	✓	✓	✓	-
 Barreleye	NH-Icon-barreleye	15000	Sea	2	9pm - 4am	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓`;
 
-const parsedData = northernHemisphereData.split(`\n`).map((rawRow: string) => {
+const parsedData = northernHemisphereFishData.split(`\n`).map((rawRow: string) => {
     const [ name, _imgLocation, price, location, shadowSize, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
     return {
         name,
@@ -189,7 +188,7 @@ const parsedData = northernHemisphereData.split(`\n`).map((rawRow: string) => {
     };
 });
 
-southernHemisphereData.split(`\n`).forEach((rawRow: string) => {
+southernHemisphereFishData.split(`\n`).forEach((rawRow: string) => {
     const [ name, _imgLocation, price, location, shadowSize, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
     const fish = parsedData.find(row => row.name === name) as any;
     fish && (fish.sMonths = {

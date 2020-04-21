@@ -1,8 +1,7 @@
 // All the info is extracted from this site:
 // https://animalcrossing.fandom.com/wiki/Bugs_(New_Horizons)
 
-
-const northernHemisphereData = `Common butterfly	NH-Icon-commonbutterfly	160	Flying	4 AM - 7 PM	✓	✓	✓	✓	✓	✓	-	-	✓	✓	✓	✓
+const northernHemisphereBugsData = `Common butterfly	NH-Icon-commonbutterfly	160	Flying	4 AM - 7 PM	✓	✓	✓	✓	✓	✓	-	-	✓	✓	✓	✓
 Yellow butterfly	NH-Icon-yellowbutterfly	160	Flying	4 AM - 7 PM	-	-	✓	✓	✓	✓	-	-	✓	✓	-	-
 Tiger butterfly	NH-Icon-tigerbutterfly	240	Flying	4 AM - 7 PM	-	-	✓	✓	✓	✓	✓	✓	✓	-	-	-
 Peacock butterfly	NH-Icon-peacockbutterfly	2500	Flying by Hybrid Flowers	4 AM - 7 PM	-	-	✓	✓	✓	✓	-	-	-	-	-	-
@@ -83,7 +82,7 @@ Spider	NH-Icon-spider	600	Shaking Trees	7 PM - 8 AM	✓	✓	✓	✓	✓	✓	✓	
 Tarantula	NH-Icon-tarantula	8000	On the Ground	7 PM - 4 AM	✓	✓	✓	✓	-	-	-	-	-	-	✓	✓
 Scorpion	NH-Icon-scorpion	8000	On the Ground	7 PM - 4 AM	-	-	-	-	✓	✓	✓	✓	✓	✓	-	-`;
 
-const southernHemisphereData = `Common butterfly	NH-Icon-commonbutterfly	160	Flying	4am - 7pm	-	-	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
+const southernHemisphereBugsData = `Common butterfly	NH-Icon-commonbutterfly	160	Flying	4am - 7pm	-	-	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Yellow butterfly	NH-Icon-yellowbutterfly	160	Flying	4am - 7pm	-	-	✓	✓	-	-	-	-	✓	✓	✓	✓
 Tiger butterfly	NH-Icon-tigerbutterfly	240	Flying	4am - 7pm	✓	✓	✓	-	-	-	-	-	✓	✓	✓	✓
 Peacock butterfly	NH-Icon-peacockbutterfly	2500	Flying by hybrid flowers	4am - 7pm	-	-	-	-	-	-	-	-	✓	✓	✓	✓
@@ -164,7 +163,7 @@ Spider	NH-Icon-spider	480	Shaking trees	7pm - 8am	✓	✓	✓	✓	✓	✓	✓	�
 Tarantula	NH-Icon-tarantula	8000	On the ground	7pm - 4am	-	-	-	-	✓	✓	✓	✓	✓	✓	-	-
 Scorpion	NH-Icon-scorpion	8000	On the ground	7pm - 4am	✓	✓	✓	✓	-	-	-	-	-	-	✓	✓`;
 
-const parsedData = northernHemisphereData.split(`\n`).map((rawRow: string) => {
+const parsedData = northernHemisphereBugsData.split(`\n`).map((rawRow: string) => {
     const [ name, _imgLocation, price, location, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
     return {
         name,
@@ -188,10 +187,10 @@ const parsedData = northernHemisphereData.split(`\n`).map((rawRow: string) => {
     };
 });
 
-southernHemisphereData.split(`\n`).forEach((rawRow: string) => {
+southernHemisphereBugsData.split(`\n`).forEach((rawRow: string) => {
     const [ name, _imgLocation, price, location, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
-    const fish = parsedData.find(row => row.name === name) as any;
-    fish && (fish.sMonths = {
+    const bug = parsedData.find(row => row.name === name) as any;
+    bug && (bug.sMonths = {
         jan: jan === "✓",
         feb: jan === "✓",
         mar: mar === "✓",
