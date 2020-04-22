@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Table, Row, Rows } from "react-native-table-component";
+import { Table, Rows } from "react-native-table-component";
+import { TableHeader } from "../TableHeader";
 
 interface Fish {
   name: string;
@@ -18,15 +19,16 @@ const fishData = fishes.map((fish: Fish) => [fish.name, fish.price, fish.locatio
 
 const styles = StyleSheet.create({
   table: { width: "100%" },
-  header: {},
+  headerContainer: {},
   tableText: { margin: 10 },
 });
 
 export const FishTable = memo(() => {
+  const [ activeIndex, setActiveIndex ] = useState<number>(0);
 
   return (
     <Table style={styles.table} borderStyle={{borderWidth: 1, borderColor: 'red'}}>
-      <Row data={header} style={styles.header}/>
+      <TableHeader data={header} activeIndex={activeIndex} cellPressedHandler={setActiveIndex}/>
       <Rows data={fishData} textStyle={styles.tableText}/>
     </Table>
   );
