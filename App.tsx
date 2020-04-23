@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
-import { FishTable } from './components/fish/FishTable';
+import { FishTable } from './src/components/fish/FishTable';
 
 // https://reactnative.dev/docs/0.22/scrollview#scrolleventthrottle
 const SCROLL_EVENT_THROTTLE = 12;
