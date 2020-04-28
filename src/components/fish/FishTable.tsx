@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Table, Rows } from "react-native-table-component";
 import { TableHeader } from "../TableHeader";
@@ -15,43 +15,31 @@ interface FishTableProps {
   tableData: string[][];
 }
 
-interface FishTableState {
-  activeIndex: number;
-  tableData: string[][];
-  ascending: boolean;
-}
-
 export const FishTable = memo((props: FishTableProps) => {
-  // Had to combine the state all into one state since they are all closely coupled.
-  // I found that I had to chain "setStates" together when I had to change the value
-  // for one of them, So i thought it would be best to just do it all at once.
-  const [ state, setState ] = useState<FishTableState>({
-    activeIndex: 0,
-    ascending: true,
-    tableData: sortData(props.tableData, 0, true, props.header[0]),
-  });
+  const [ activeIndex, setActiveIndex ] = useState<number>(0);
+  const [ ascending, setAscending ] = useState<boolean>(true);
+  const [ tableData, setTableData ] = useState<Array<string[]>>(sortData(props.tableData, activeIndex, ascending, props.header[activeIndex]));
 
   const handleHeaderCellPressed = (index: number) => {
-    setState(({ activeIndex, ascending, tableData }) => {
-      if (index === activeIndex) {
-        ascending = !ascending;
-      } else {
-        activeIndex = index;
-        ascending = true;
-      }
-
-      return {
-        activeIndex,
-        ascending,
-        tableData: sortData(tableData, activeIndex, ascending, props.header[activeIndex]),
-      };
+    setActiveIndex((currActiveIndex) => {
+      const updateAscending = currActiveIndex === index;
+      setAscending((currAscending) => {
+        const newAscending = updateAscending ? !currAscending : true;
+        setTableData(sortData(props.tableData, index, newAscending, props.header[index]));
+        return newAscending;
+      });
+      return index;
     });
   }
 
+  useEffect(() => {
+    setTableData(sortData(props.tableData, activeIndex, ascending, props.header[activeIndex]))
+  }, [props])
+
   return (
     <Table style={styles.table} borderStyle={{borderWidth: 1, borderColor: 'red'}}>
-      <TableHeader data={props.header} activeIndex={state.activeIndex} ascending={state.ascending} cellPressedHandler={handleHeaderCellPressed}/>
-      <Rows data={state.tableData} textStyle={styles.tableText}/>
+      <TableHeader data={props.header} activeIndex={activeIndex} ascending={ascending} cellPressedHandler={handleHeaderCellPressed}/>
+      <Rows data={tableData} textStyle={styles.tableText}/>
     </Table>
   );
 });
