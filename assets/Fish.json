@@ -438,6 +438,20 @@
             "oct": true,
             "nov": false,
             "dec": false
+        },
+        "sMonths": {
+            "jan": true,
+            "feb": true,
+            "mar": true,
+            "apr": true,
+            "may": false,
+            "jun": false,
+            "jul": false,
+            "aug": false,
+            "sep": false,
+            "oct": true,
+            "nov": true,
+            "dec": true
         }
     },
     {
