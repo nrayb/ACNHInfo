@@ -10,8 +10,8 @@ interface Bug {
   price: string;
   location: string;
   spawnTime: string;
-  nMonths: Record<string, boolean>;
-  sMonths: Record<string, boolean>;
+  nMonths: boolean[];
+  sMonths: boolean[];
 }
 
 const header = [HeaderType.name, HeaderType.price, HeaderType.location, HeaderType.spawnTime, HeaderType.monthSpawn];

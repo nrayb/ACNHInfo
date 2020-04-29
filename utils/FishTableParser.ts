@@ -94,7 +94,7 @@ Ranchu goldfish	NH-Icon-ranchugoldfish	4500	Pond	2	9am - 4pm	✓	✓	✓	✓	✓
 Killifish	NH-Icon-killifish	300	Pond	1	All day	✓	✓	-	-	-	-	-	-	-	✓	✓	✓
 Crawfish	NH-Icon-crawfish	200	Pond	2	All day	✓	✓	✓	-	-	-	-	-	-	✓	✓	✓
 Soft-shelled turtle	NH-Icon-softshelledturtle	3750	River	4	4pm - 9am	-	✓	✓	-	-	-	-	-	-	-	-	-
-Snapping turtle	NH-Icon-snappingturtle	5000	River	4	9pm - 4am	✓	✓	✓	✓	-	-	-	-	-	✓	✓	✓
+Snapping Turtle	NH-Icon-snappingturtle	5000	River	4	9pm - 4am	✓	✓	✓	✓	-	-	-	-	-	✓	✓	✓
 Tadpole	NH-Icon-tadpole	100	Pond	1	All day	✓	-	-	-	-	-	-	-	✓	✓	✓	✓
 Frog	NH-Icon-frog	120	Pond	2	All day	✓	✓	-	-	-	-	-	-	-	-	✓	✓
 Freshwater goby	NH-Icon-freshwatergoby	400	River	2	4pm - 9am	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
@@ -163,7 +163,7 @@ Oarfish	NH-Icon-oarfish	9000	Sea	6	All day	-	-	-	-	-	✓	✓	✓	✓	✓	✓	-
 Barreleye	NH-Icon-barreleye	15000	Sea	2	9pm - 4am	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓
 Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓	✓`;
 
-const parsedData = northernHemisphereFishData.split(`\n`).map((rawRow: string) => {
+const fishParsedData = northernHemisphereFishData.split(`\n`).map((rawRow: string) => {
     const [ name, _imgLocation, price, location, shadowSize, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
     return {
         name,
@@ -171,40 +171,43 @@ const parsedData = northernHemisphereFishData.split(`\n`).map((rawRow: string) =
         location,
         shadowSize,
         spawnTime,
-        nMonths: {
-            jan: jan === "✓",
-            feb: jan === "✓",
-            mar: mar === "✓",
-            apr: apr === "✓",
-            may: may === "✓",
-            jun: jun === "✓",
-            jul: jul === "✓",
-            aug: aug === "✓",
-            sep: sep === "✓",
-            oct: oct === "✓",
-            nov: nov === "✓",
-            dec: dec === "✓",
-        },
+        nMonths: [
+            jan === "✓",
+            feb === "✓",
+            mar === "✓",
+            apr === "✓",
+            may === "✓",
+            jun === "✓",
+            jul === "✓",
+            aug === "✓",
+            sep === "✓",
+            oct === "✓",
+            nov === "✓",
+            dec === "✓",
+        ],
     };
 });
 
 southernHemisphereFishData.split(`\n`).forEach((rawRow: string) => {
     const [ name, _imgLocation, price, location, shadowSize, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
-    const fish = parsedData.find(row => row.name === name) as any;
-    fish && (fish.sMonths = {
-        jan: jan === "✓",
-        feb: jan === "✓",
-        mar: mar === "✓",
-        apr: apr === "✓",
-        may: may === "✓",
-        jun: jun === "✓",
-        jul: jul === "✓",
-        aug: aug === "✓",
-        sep: sep === "✓",
-        oct: oct === "✓",
-        nov: nov === "✓",
-        dec: dec === "✓",
-    });
+    const fish = fishParsedData.find(row => row.name === name) as any;
+
+    if (!fish) { throw `ERROR: Couldn't find fish: ${name}` }
+
+    fish.sMonths = [
+        jan === "✓",
+        feb === "✓",
+        mar === "✓",
+        apr === "✓",
+        may === "✓",
+        jun === "✓",
+        jul === "✓",
+        aug === "✓",
+        sep === "✓",
+        oct === "✓",
+        nov === "✓",
+        dec === "✓",
+    ];
 });
 
-console.log(JSON.stringify(parsedData));
+console.log(JSON.stringify(fishParsedData));

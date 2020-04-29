@@ -163,47 +163,50 @@ Spider	NH-Icon-spider	480	Shaking trees	7pm - 8am	✓	✓	✓	✓	✓	✓	✓	�
 Tarantula	NH-Icon-tarantula	8000	On the ground	7pm - 4am	-	-	-	-	✓	✓	✓	✓	✓	✓	-	-
 Scorpion	NH-Icon-scorpion	8000	On the ground	7pm - 4am	✓	✓	✓	✓	-	-	-	-	-	-	✓	✓`;
 
-const parsedData = northernHemisphereBugsData.split(`\n`).map((rawRow: string) => {
+const bugsParsedData = northernHemisphereBugsData.split(`\n`).map((rawRow: string) => {
     const [ name, _imgLocation, price, location, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
     return {
         name,
         price,
         location,
         spawnTime,
-        nMonths: {
-            jan: jan === "✓",
-            feb: jan === "✓",
-            mar: mar === "✓",
-            apr: apr === "✓",
-            may: may === "✓",
-            jun: jun === "✓",
-            jul: jul === "✓",
-            aug: aug === "✓",
-            sep: sep === "✓",
-            oct: oct === "✓",
-            nov: nov === "✓",
-            dec: dec === "✓",
-        },
+        nMonths: [
+            jan === "✓",
+            feb === "✓",
+            mar === "✓",
+            apr === "✓",
+            may === "✓",
+            jun === "✓",
+            jul === "✓",
+            aug === "✓",
+            sep === "✓",
+            oct === "✓",
+            nov === "✓",
+            dec === "✓",
+        ],
     };
 });
 
 southernHemisphereBugsData.split(`\n`).forEach((rawRow: string) => {
     const [ name, _imgLocation, price, location, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
-    const bug = parsedData.find(row => row.name === name) as any;
-    bug && (bug.sMonths = {
-        jan: jan === "✓",
-        feb: jan === "✓",
-        mar: mar === "✓",
-        apr: apr === "✓",
-        may: may === "✓",
-        jun: jun === "✓",
-        jul: jul === "✓",
-        aug: aug === "✓",
-        sep: sep === "✓",
-        oct: oct === "✓",
-        nov: nov === "✓",
-        dec: dec === "✓",
-    });
+    const bug = bugsParsedData.find(row => row.name === name) as any;
+
+    if (!bug) { throw `ERROR: Couldn't find fish: ${name}` }
+
+    bug.sMonths = [
+        jan === "✓",
+        feb === "✓",
+        mar === "✓",
+        apr === "✓",
+        may === "✓",
+        jun === "✓",
+        jul === "✓",
+        aug === "✓",
+        sep === "✓",
+        oct === "✓",
+        nov === "✓",
+        dec === "✓",
+    ];
 });
 
-console.log(JSON.stringify(parsedData));
+console.log(JSON.stringify(bugsParsedData));
