@@ -1,6 +1,7 @@
 // I know this sin't the best place for this.
 // Just going to keep this here for now until I can find a more appropriate place for it
 export enum HeaderType {
+  monthSpawn = "Month",
   name = "Name",
   price = "Price",
   location = "Location",
@@ -12,8 +13,9 @@ export const sortData = (data: string[][], index: number, ascending: boolean, he
   let comparator: (a: string[], b: string[]) => number;
 
   switch (headerType) {
+    case HeaderType.monthSpawn:
     case HeaderType.spawnTime:
-      // We need special handling for this, but for now, keep the simple text comparator
+        // We need special handling for this, but for now, keep the simple text comparator
     case HeaderType.name:
     case HeaderType.location:
         comparator = (a, b) => {
