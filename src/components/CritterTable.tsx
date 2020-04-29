@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Table, Rows } from "react-native-table-component";
-import { TableHeader } from "../TableHeader";
-import { HeaderType, sortData } from "../../utils/SortUtils";
+import { CritterTableHeader } from "./CritterTableHeader";
+import { HeaderType, sortData } from "../utils/SortUtils";
 
 const styles = StyleSheet.create({
   table: { width: "100%" },
@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   tableText: { margin: 10 },
 });
 
-interface FishTableProps {
+interface CritterTableProps {
   header: HeaderType[];
   tableData: string[][];
 }
 
-export const FishTable = memo((props: FishTableProps) => {
+export const CritterTable = memo((props: CritterTableProps) => {
   const [ activeIndex, setActiveIndex ] = useState<number>(0);
   const [ ascending, setAscending ] = useState<boolean>(true);
   const [ tableData, setTableData ] = useState<Array<string[]>>(sortData(props.tableData, activeIndex, ascending, props.header[activeIndex]));
@@ -38,7 +38,7 @@ export const FishTable = memo((props: FishTableProps) => {
 
   return (
     <Table style={styles.table} borderStyle={{borderWidth: 1, borderColor: 'red'}}>
-      <TableHeader data={props.header} activeIndex={activeIndex} ascending={ascending} cellPressedHandler={handleHeaderCellPressed}/>
+      <CritterTableHeader data={props.header} activeIndex={activeIndex} ascending={ascending} cellPressedHandler={handleHeaderCellPressed}/>
       <Rows data={tableData} textStyle={styles.tableText}/>
     </Table>
   );

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { FishTable } from '../components/fish/FishTable';
+import { CritterTable } from '../components/CritterTable';
 import { HeaderType } from '../utils/SortUtils';
 
 interface Fish {
@@ -24,7 +24,7 @@ export const FishPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView bounces={false} style={styles.scrollView} scrollEventThrottle={SCROLL_EVENT_THROTTLE} >
-        <FishTable header={header} tableData={fishData}/>
+        <CritterTable header={header} tableData={fishData}/>
       </ScrollView>
     </SafeAreaView>
   );

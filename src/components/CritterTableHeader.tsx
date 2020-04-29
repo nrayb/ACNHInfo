@@ -9,7 +9,7 @@ interface TableHeaderProps {
   cellPressedHandler: (index: number) => void;
 }
 
-export const TableHeader = memo((props: TableHeaderProps) => {
+export const CritterTableHeader = memo((props: TableHeaderProps) => {
   const createHeaderCell = (headerCellData: string, index: number): React.ReactNode => {
     const { activeIndex, ascending, cellPressedHandler } = props;
     const viewStyle = index === activeIndex ? { ...styles.headerButton, ...(ascending ? styles.activeAscendingButton : styles.activeDescendingbutton) } : styles.headerButton;
