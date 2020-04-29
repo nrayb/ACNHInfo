@@ -5,35 +5,34 @@ import { HeaderType } from '../utils/SortUtils';
 import { getDisplayName } from '../utils/MonthUtils';
 import { useHemisphereState } from "../HemisphereContext";
 
-interface Fish {
+interface Bug {
   name: string;
   price: string;
   location: string;
-  shadowSize: string;
   spawnTime: string;
   nMonths: Record<string, boolean>;
   sMonths: Record<string, boolean>;
 }
 
 const header = [HeaderType.name, HeaderType.price, HeaderType.location, HeaderType.spawnTime, HeaderType.monthSpawn];
-const fishes = require("../../assets/Fish.json");
+const bugs = require("../../assets/Bugs.json");
 
 // https://reactnative.dev/docs/0.22/scrollview#scrolleventthrottle
 const SCROLL_EVENT_THROTTLE = 12;
 
-export const FishPage = memo(() => {
+export const BugsPage = memo(() => {
   const hemisphere = useHemisphereState();
 
-  const fishData: string[][] = fishes.map((fish: Fish) => {
-    const monthsData = hemisphere === "north" ? fish.nMonths : fish.sMonths;
+  const bugsData: string[][] = bugs.map((bug: Bug) => {
+    const monthsData = hemisphere === "north" ? bug.nMonths : bug.sMonths;
     const monthsDisplayName = getDisplayName(monthsData);
-    return [fish.name, fish.price, fish.location, fish.spawnTime, monthsDisplayName];
+    return [bug.name, bug.price, bug.location, bug.spawnTime, monthsDisplayName];
   });
 
   return (
     <SafeAreaView>
       <ScrollView bounces={false} scrollEventThrottle={SCROLL_EVENT_THROTTLE} >
-        <CritterTable header={header} tableData={fishData}/>
+        <CritterTable header={header} tableData={bugsData}/>
       </ScrollView>
     </SafeAreaView>
   );
