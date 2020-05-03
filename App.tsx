@@ -1,6 +1,7 @@
 import React from 'react';
+import { Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppDrawer } from './src/components/AppDrawer';
 import { HemisphereProvider } from './src/context/Hemisphere'
@@ -17,6 +18,18 @@ export default function App() {
             <Screen
               name="Drawer"
               component={DrawerNavigator}
+              // TODO: Add typing to this function
+              options={({ navigation }) => ({
+                headerLeft: () => (
+                  <Button
+                    onPress={() => {
+                      navigation.dispatch(DrawerActions.toggleDrawer());
+                    }}
+                    title="Menu"
+                    color="red"
+                  />
+                )
+              })}
             />
           </Navigator>
       </NavigationContainer>
