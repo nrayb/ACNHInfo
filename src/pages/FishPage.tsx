@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { CritterTable } from '../components/CritterTable';
 import { HeaderType } from '../utils/SortUtils';
 import { getDisplayName } from '../utils/MonthUtils';
-import { useHemisphereState } from "../HemisphereContext";
+import { useHemisphereState } from "../context/Hemisphere";
 
 interface Fish {
   name: string;

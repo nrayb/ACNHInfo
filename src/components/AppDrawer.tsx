@@ -5,7 +5,7 @@ import {
   DrawerItem,
   DrawerItemList
 } from '@react-navigation/drawer';
-import { useHemisphereDispatch } from "../HemisphereContext"
+import { useHemisphereDispatch } from "../context/Hemisphere";
 
 export const AppDrawer = (props: DrawerContentComponentProps) => {
   const dispatch = useHemisphereDispatch();

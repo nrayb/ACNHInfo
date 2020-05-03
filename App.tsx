@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { BugsPage } from './src/pages/BugsPage';
 import { FishPage } from './src/pages/FishPage';
 import { AppDrawer } from './src/components/AppDrawer';
-import { HemisphereProvider } from './src/HemisphereContext'
+import { HemisphereProvider } from './src/context/Hemisphere'
 
 export default function App() {
   const { Navigator, Screen } = createDrawerNavigator();
