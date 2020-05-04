@@ -17,9 +17,6 @@ interface Bug {
 const header = [HeaderType.name, HeaderType.price, HeaderType.location, HeaderType.spawnTime, HeaderType.monthSpawn];
 const bugs = require("../../assets/Bugs.json");
 
-// https://reactnative.dev/docs/0.22/scrollview#scrolleventthrottle
-const SCROLL_EVENT_THROTTLE = 12;
-
 export const BugsPage = memo(() => {
   const hemisphere = useHemisphereState();
 
@@ -31,9 +28,7 @@ export const BugsPage = memo(() => {
 
   return (
     <SafeAreaView>
-      <ScrollView bounces={false} scrollEventThrottle={SCROLL_EVENT_THROTTLE} >
-        <CritterTable header={header} tableData={bugsData}/>
-      </ScrollView>
+      <CritterTable header={header} tableData={bugsData}/>
     </SafeAreaView>
   );
 });

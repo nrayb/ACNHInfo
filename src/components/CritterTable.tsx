@@ -1,8 +1,11 @@
 import React, { memo, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { Table, Rows } from "react-native-table-component";
 import { CritterTableHeader } from "./CritterTableHeader";
 import { HeaderType, sortData } from "../utils/SortUtils";
+
+// https://reactnative.dev/docs/0.22/scrollview#scrolleventthrottle
+const SCROLL_EVENT_THROTTLE = 12;
 
 const styles = StyleSheet.create({
   table: { width: "100%" },
@@ -36,10 +39,18 @@ export const CritterTable = memo((props: CritterTableProps) => {
     setTableData(sortData(props.tableData, activeIndex, ascending, props.header[activeIndex]))
   }, [props])
 
+  const borderStyle = {borderWidth: 1, borderColor: 'red'};
+
   return (
-    <Table style={styles.table} borderStyle={{borderWidth: 1, borderColor: 'red'}}>
-      <CritterTableHeader data={props.header} activeIndex={activeIndex} ascending={ascending} cellPressedHandler={handleHeaderCellPressed}/>
-      <Rows data={tableData} textStyle={styles.tableText}/>
-    </Table>
+    <>
+      <Table style={styles.table} borderStyle={borderStyle}>
+        <CritterTableHeader data={props.header} activeIndex={activeIndex} ascending={ascending} cellPressedHandler={handleHeaderCellPressed}/>
+      </Table>
+      <ScrollView bounces={false} scrollEventThrottle={SCROLL_EVENT_THROTTLE} >
+        <Table style={styles.table} borderStyle={borderStyle}>
+          <Rows data={tableData} textStyle={styles.tableText}/>
+        </Table>
+      </ScrollView>
+    </>
   );
 });

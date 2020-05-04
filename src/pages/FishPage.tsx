@@ -18,8 +18,7 @@ interface Fish {
 const header = [HeaderType.name, HeaderType.price, HeaderType.location, HeaderType.spawnTime, HeaderType.monthSpawn];
 const fishes = require("../../assets/Fish.json");
 
-// https://reactnative.dev/docs/0.22/scrollview#scrolleventthrottle
-const SCROLL_EVENT_THROTTLE = 12;
+
 
 export const FishPage = memo(() => {
   const hemisphere = useHemisphereState();
@@ -32,9 +31,7 @@ export const FishPage = memo(() => {
 
   return (
     <SafeAreaView>
-      <ScrollView bounces={false} scrollEventThrottle={SCROLL_EVENT_THROTTLE} >
-        <CritterTable header={header} tableData={fishData}/>
-      </ScrollView>
+      <CritterTable header={header} tableData={fishData}/>
     </SafeAreaView>
   );
 });
