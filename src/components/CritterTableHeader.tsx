@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { TouchableOpacity, View, Text, Button, StyleSheet } from 'react-native';
-import { Cell, TableWrapper } from 'react-native-table-component';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { Row } from 'react-native-table-component';
 
 interface TableHeaderProps {
   data: string[];
@@ -24,15 +24,7 @@ export const CritterTableHeader = memo((props: TableHeaderProps) => {
     );
   }
 
-  return (
-    <TableWrapper style={styles.container}>
-      {
-        props.data.map((cellString, index) => (
-          <Cell key={index} data={createHeaderCell(cellString, index)} textStyle={styles.cellText}/>
-        ))
-      }
-    </TableWrapper>
-  );
+  return <Row style={styles.container} data={props.data.map(createHeaderCell)}/>;
 });
 
 const styles = StyleSheet.create({
