@@ -21,7 +21,7 @@ export const CritterTableHeader = memo((props: TableHeaderProps) => {
           <Text style={ styles.cellText }>
             { headerCellData }
           </Text>
-          { activeIndex === index && <Icon size={SORT_INDICATOR_ICON_SIZE} type="font-awesome" name={ ascending ? "sort-up" : "sort-down" } /> }
+          { activeIndex === index && <Icon size={SORT_INDICATOR_ICON_SIZE} type="font-awesome" name={ ascending ? "angle-up" : "angle-down" } /> }
         </View>
       </TouchableOpacity>
     );
