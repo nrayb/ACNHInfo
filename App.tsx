@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,7 +14,8 @@ export default function App() {
 
   return (
     <HemisphereProvider>
-      <NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
           <Navigator>
             <Screen
               name="Drawer"
@@ -32,7 +34,8 @@ export default function App() {
               })}
             />
           </Navigator>
-      </NavigationContainer>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </HemisphereProvider>
   );
 }
