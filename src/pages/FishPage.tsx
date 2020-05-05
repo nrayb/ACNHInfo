@@ -5,16 +5,7 @@ import { CritterTable } from '../components/CritterTable';
 import { HeaderType } from '../utils/SortUtils';
 import { getDisplayName } from '../utils/MonthUtils';
 import { useHemisphereState } from "../context/Hemisphere";
-
-interface Fish {
-  name: string;
-  price: string;
-  location: string;
-  shadowSize: string;
-  spawnTime: string;
-  nMonths: boolean[];
-  sMonths: boolean[];
-}
+import { Critter } from "../types";
 
 const header = [HeaderType.name, HeaderType.price, HeaderType.location, HeaderType.spawnTime, HeaderType.monthSpawn];
 const fishes = require("../../assets/Fish.json");
@@ -23,8 +14,8 @@ export const FishPage = memo(() => {
   const insets = useSafeArea();
   const hemisphere = useHemisphereState();
 
-  const fishData: string[][] = fishes.map((fish: Fish) => {
-    const monthsData = hemisphere === "north" ? fish.nMonths : fish.sMonths;
+  const fishData: string[][] = fishes.map((fish: Critter) => {
+    const monthsData = hemisphere === "north" ? fish.availability.northMonths : fish.availability.southMonths;
     const monthsDisplayName = getDisplayName(monthsData);
     return [fish.name, fish.price, fish.location, fish.spawnTime, monthsDisplayName];
   });
