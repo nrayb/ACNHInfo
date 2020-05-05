@@ -28,7 +28,6 @@ export const FishPage = memo(() => {
     const monthsDisplayName = getDisplayName(monthsData);
     return [fish.name, fish.price, fish.location, fish.spawnTime, monthsDisplayName];
   });
-  console.log(insets);
 
   return (
     // TODO: Look into why the insets need to be like this.

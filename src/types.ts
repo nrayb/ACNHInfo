@@ -9,3 +9,14 @@ export type DrawerNavigatorProps = {
   navigation: StackNavigationProp<RootStackParamList, "Drawer">,
   route: RouteProp<RootStackParamList, "Drawer">,
 }
+
+export interface Critter {
+  name: string;
+  price: string;
+  location: string;
+  availability: {
+    hours: boolean[],
+    northMonths: boolean[],
+    southMonths: boolean[],
+  };
+}
