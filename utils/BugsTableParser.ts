@@ -173,7 +173,7 @@ Scorpion	NH-Icon-scorpion	8000	On the ground	7 PM - 4 AM	✓	✓	✓	✓	-	-	-	-
         const [ name, _imgLocation, price, location, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
         return {
             name,
-            price: parseInt(price),
+            price,
             location,
             spawnTime,
             availability: {
@@ -200,7 +200,7 @@ Scorpion	NH-Icon-scorpion	8000	On the ground	7 PM - 4 AM	✓	✓	✓	✓	-	-	-	-
         const bug = bugsParsedData.find(row => row.name === name) as any;
 
         if (!bug) throw `ERROR: Couldn't find bug: ${name}`;
-        if (parseInt(price) !== bug.price) throw `ERROR: Bug: ${name} had mismatching price`;
+        if (price !== bug.price) throw `ERROR: Bug: ${name} had mismatching price`;
         // if (location !== bug.location) throw `ERROR: Bug: ${name} had mismatching location`;
         if (spawnTime !== bug.spawnTime) throw `ERROR: Bug: ${name} had mismatching spawnTime`;
 
@@ -253,7 +253,7 @@ Scorpion	NH-Icon-scorpion	8000	On the ground	7 PM - 4 AM	✓	✓	✓	✓	-	-	-	-
 
             bug.availability.hours = hours;
 
-            delete bug.spawnTime;
+            // delete bug.spawnTime;
         } catch(e) {
             console.error(e);
         }
@@ -267,8 +267,8 @@ Scorpion	NH-Icon-scorpion	8000	On the ground	7 PM - 4 AM	✓	✓	✓	✓	-	-	-	-
 
         const { name, price, location, availability: { hours, northMonths, southMonths }} = bug as any;
 
-        if (name === undefined || price === null || typeof name !== typeof "") throw `ERROR: bug: ${name} failed final validation with invalid name`;
-        if (price === undefined || price === null || typeof price !== typeof 0) throw `ERROR: bug: ${name} failed final validation with invalid price`;
+        if (name === undefined || name === null || typeof name !== typeof "") throw `ERROR: bug: ${name} failed final validation with invalid name`;
+        if (price === undefined || price === null || typeof price !== typeof "") throw `ERROR: bug: ${name} failed final validation with invalid price`;
         if (location === undefined || location === null || typeof location !== typeof "") throw `ERROR: bug: ${name} failed final validation with invalid location`;
         if (hours === undefined || hours === null || typeof hours !== typeof [] || hours.find(findNotBool)) throw `ERROR: bug: ${name} failed final validation with invalid hours`;
         if (northMonths === undefined || northMonths === null || typeof northMonths !== typeof [] || northMonths.find(findNotBool)) throw `ERROR: bug: ${name} failed final validation with invalid northMonths`;

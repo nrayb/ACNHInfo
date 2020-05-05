@@ -174,7 +174,7 @@ Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	�
         const [ name, _imgLocation, price, location, shadowSize, spawnTime, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec ] = rawRow.split(`\t`);
         return {
             name,
-            price: parseInt(price),
+            price,
             location,
             shadowSize,
             spawnTime,
@@ -202,7 +202,7 @@ Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	�
         const fish = fishParsedData.find(row => row.name === name) as any;
 
         if (!fish) throw `ERROR: Couldn't find fish: ${name}`;
-        if (parseInt(price) !== fish.price) throw `ERROR: Fish: ${name} had mismatching price`;
+        if (price !== fish.price) throw `ERROR: Fish: ${name} had mismatching price`;
         // if (location !== fish.location) throw `ERROR: Fish: ${name} had mismatching location`;
         if (spawnTime !== fish.spawnTime) throw `ERROR: Fish: ${name} had mismatching spawnTime`;
 
@@ -255,7 +255,7 @@ Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	�
 
             fish.availability.hours = hours;
 
-            delete fish.spawnTime;
+            // delete fish.spawnTime;
         } catch(e) {
             console.error(e);
         }
@@ -269,8 +269,8 @@ Coelacanth	NH-Icon-coelacanth	15000	Sea (while raining)	6	All day	✓	✓	✓	�
 
         const { name, price, location, availability: { hours, northMonths, southMonths }} = fish as any;
 
-        if (name === undefined || price === null || typeof name !== typeof "") throw `ERROR: fish: ${name} failed final validation with invalid name`;
-        if (price === undefined || price === null || typeof price !== typeof 0) throw `ERROR: fish: ${name} failed final validation with invalid price`;
+        if (name === undefined || name === null || typeof name !== typeof "") throw `ERROR: fish: ${name} failed final validation with invalid name`;
+        if (price === undefined || price === null || typeof price !== typeof "") throw `ERROR: fish: ${name} failed final validation with invalid price`;
         if (location === undefined || location === null || typeof location !== typeof "") throw `ERROR: fish: ${name} failed final validation with invalid location`;
         if (hours === undefined || hours === null || typeof hours !== typeof [] || hours.find(findNotBool)) throw `ERROR: fish: ${name} failed final validation with invalid hours`;
         if (northMonths === undefined || northMonths === null || typeof northMonths !== typeof [] || northMonths.find(findNotBool)) throw `ERROR: fish: ${name} failed final validation with invalid northMonths`;

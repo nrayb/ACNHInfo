@@ -13,6 +13,7 @@ export type DrawerNavigatorProps = {
 export interface Critter {
   name: string;
   price: string;
+  spawnTime: string;
   location: string;
   availability: {
     hours: boolean[],
