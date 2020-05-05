@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Icon } from 'react-native-elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,12 +23,14 @@ export default function App() {
               // TODO: Add typing to this function
               options={({ navigation }) => ({
                 headerLeft: () => (
-                  <Button
+                  <Icon
+                    size={25}
+                    style={{ padding: 5, paddingLeft: 20 }}
+                    type="font-awesome"
+                    name="bars"
                     onPress={() => {
                       navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    title="Menu"
-                    color="red"
                   />
                 )
               })}
