@@ -15,7 +15,7 @@ export const FishPage = memo(() => {
   const hemisphere = useHemisphereState();
 
   const fishData: string[][] = fishes.map((fish: Critter) => {
-    const monthsData = hemisphere === "north" ? fish.availability.northMonths : fish.availability.southMonths;
+    const monthsData = hemisphere === "North" ? fish.availability.northMonths : fish.availability.southMonths;
     const monthsDisplayName = getDisplayName(monthsData);
     return [fish.name, fish.price, fish.location, fish.spawnTime, monthsDisplayName];
   });

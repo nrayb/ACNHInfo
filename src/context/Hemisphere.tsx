@@ -5,7 +5,7 @@
 import React, { createContext, useReducer } from 'react';
 
 type Action = {type: 'toggle'};
-type State = "north" | "south";
+type State = "North" | "South";
 type Dispatch = (action: Action) => void;
 type HemisphereProviderProps = {children: React.ReactNode};
 
@@ -15,7 +15,7 @@ const HemisphereDispatchContext = createContext<Dispatch | undefined>(undefined)
 function hemisphereReducer(state: State, action: Action) {
   switch (action.type) {
     case 'toggle': {
-      return state === "north" ? "south" : "north";
+      return state === "North" ? "South" : "North";
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -24,7 +24,7 @@ function hemisphereReducer(state: State, action: Action) {
 }
 
 export const HemisphereProvider = ({ children }: HemisphereProviderProps) => {
-  const [state, dispatch] = useReducer(hemisphereReducer, "north");
+  const [state, dispatch] = useReducer(hemisphereReducer, "North");
   return (
     <HemisphereStateContext.Provider value={state}>
       <HemisphereDispatchContext.Provider value={dispatch}>

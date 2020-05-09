@@ -15,7 +15,7 @@ export const BugsPage = memo(() => {
   const hemisphere = useHemisphereState();
 
   const bugsData: string[][] = bugs.map((bug: Critter) => {
-    const monthsData = hemisphere === "north" ? bug.availability.northMonths : bug.availability.southMonths;
+    const monthsData = hemisphere === "North" ? bug.availability.northMonths : bug.availability.southMonths;
     const monthsDisplayName = getDisplayName(monthsData);
     return [bug.name, bug.price, bug.location, bug.spawnTime, monthsDisplayName];
   });
